@@ -1,0 +1,62 @@
+<!-- loading spinner -->
+<div class="fixed" *ngIf="isLoading" style="text-align: center;">
+	<app-loading-spinner></app-loading-spinner>
+</div>
+<!-- wrapper -->
+<div class="px-2 mb-5">
+	<div class="form-group  mt-2 mb-4">
+		<input type="text" [(ngModel)]="filteredName" placeholder="search by name" class="form-control" #inputField>
+	</div>
+	<!-- table -->
+	<div class="card p-3 table-responsive mb-4 bg-light">
+		<table class="table mb-0 table-borderless table-sm caption-top">
+			<caption class="text-center pt-0 text-black-50">List of customers</caption>
+			<thead>
+				<tr>
+					<th scope="col">Full Name</th>
+					<th scope="col">Email</th>
+					<!-- <th scope="col">Id</th> -->
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody *ngIf="!isLoading">
+				<p class="p-4" *ngIf="customers.length == 0">List is empty</p>
+				<!-- customer list based on filtered search -->
+				<ng-container *ngIf="inputField.value != ''">
+					<ng-container *ngFor="let customer of customerList  | filter: filteredName">
+						<tr [ngClass]="(customer.status == 0) ? 'disabled': ''">
+							<td>{{customer.firstName}} {{customer.lastName}}</td>
+							<td>{{customer.email}}</td>
+							<td>
+								<div class="btn-wrap">
+									<button class="btn btn-success btn-sm m-1" (click)="onEdit(customer.id)" [disabled]="customer.status == 0">Edit</button>
+									<button type="button" class="btn btn-danger btn-sm m-1" (click)="onDelete(customer)" [disabled]="customer.status == 0">Delete</button>
+									<button class="btn btn-primary btn-sm m-1" (click)="onDisable(customer, customer.status)">{{(customer.status == 0) ? 'Enable' : 'Disable'}}</button>
+								</div>
+							</td>
+						</tr>
+					</ng-container>
+				</ng-container>
+				<!-- customer list with pagination -->
+				<ng-container *ngIf="inputField.value == ''">
+					<ng-container *ngFor="let customer of customers; let count = index">
+						<tr [ngClass]="(customer.status == 0) ? 'disabled': ''">
+							<td>{{customer.firstName}} {{customer.lastName}}</td>
+							<td>{{customer.email}}</td>
+							<!-- <td>{{customer.id}}</td> -->
+							<td>
+								<div class="btn-wrap">
+									<button class="btn btn-success btn-sm m-1" (click)="onEdit(customer.id)" [disabled]="customer.status == 0">Edit</button>
+									<button type="button" class="btn btn-danger btn-sm m-1" (click)="onDelete(customer)" [disabled]="customer.status == 0">Delete</button>
+									<button class="btn btn-primary btn-sm m-1" (click)="onDisable(customer, customer.status)">{{(customer.status == 0) ? 'Enable' : 'Disable'}}</button>
+								</div>
+							</td>
+						</tr>
+					</ng-container>
+				</ng-container>
+			</tbody>
+		</table>
+	</div>
+	<!-- pagination -->
+	<app-pagination [limit]="listCount" [pageNumbers]="pageNumbers"></app-pagination>
+</div>

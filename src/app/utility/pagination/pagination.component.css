@@ -1,0 +1,6 @@
+.page-link:focus {
+    box-shadow: none;
+}
+.page-link:hover{
+    cursor: pointer;
+}

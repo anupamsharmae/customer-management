@@ -1,0 +1,9 @@
+input.ng-invalid.ng-touched{
+    border: 1px solid crimson;
+}
+.form-text{
+    color: crimson;
+}
+form{
+    padding: 1rem;
+}

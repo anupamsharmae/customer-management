@@ -1,0 +1,10 @@
+.disabled{
+    color: #c6c6c6
+}
+td, th{
+    vertical-align:middle;
+    white-space: nowrap;
+}
+.card{
+    min-height: 50px;
+}

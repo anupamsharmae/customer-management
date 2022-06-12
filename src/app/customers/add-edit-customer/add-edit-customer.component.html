@@ -1,0 +1,74 @@
+<div *ngIf="isLoading" class="fixed">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<!-- CUSTOMER FORM -->
+<form class="card my-3" [formGroup]="customerForm" (ngSubmit)="onSubmitForm()" *ngIf="!isLoading">
+    <!-- name -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6 mb-3 mb-lg-0">
+                <label for="firstName" class="form-label">First name</label>
+                <input type="text" id="firstName" name="firstName" formControlName="firstName" placeholder="e.g: John" class="form-control">
+                <p class="form-text"
+                    *ngIf="!customerForm.get('firstName')?.valid && customerForm.get('firstName')?.touched">
+                    <span *ngIf="customerForm.get('firstName')?.errors?.['required']">Required</span>
+                </p>
+            </div>
+            <div class="col-md-6">
+                <label for="lastName" class="form-label">Last name</label>
+                <input type="text" id="lastName" name="lastName" formControlName="lastName" placeholder="e.g: Smit" class="form-control">
+                <p class="form-text" *ngIf="!customerForm.get('lastName')?.valid && customerForm.get('lastName')?.touched">
+                    <span *ngIf="customerForm.get('lastName')?.errors?.['required']">Required</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- email -->
+    <div class="form-group">
+        <label for="email" class="form-label">Email Address</label>
+        <input type="email" name="email" id="email" formControlName="email" placeholder="e.g: mail@example.com" class="form-control">
+        <p class="form-text" *ngIf="!customerForm.get('email')?.valid && customerForm.get('email')?.touched">
+            <span *ngIf="customerForm.get('email')?.errors?.['pattern']">Must contain single '@' and '.' </span>
+            <span *ngIf="customerForm.get('email')?.errors?.['email']">Please enter a valid Email</span>
+            <span *ngIf="customerForm.get('email')?.errors?.['required']">Required</span>
+        </p>
+    </div>
+    <!-- company name -->
+    <div class="form-group">
+        <label for="companyName" class="form-label">Company Name</label>
+        <input type="text" name="companyName" id="companyName" formControlName="companyName" placeholder="e.g: The Organization" class="form-control">
+        <p class="form-text"
+            *ngIf="!customerForm.get('companyName')?.valid && customerForm.get('companyName')?.touched">
+            <span *ngIf="customerForm.get('companyName')?.errors?.['required']">Required</span>
+        </p>
+    </div>
+    <!-- gender & phone -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6 mb-3 mb-lg-0">
+                <label for="gender" class="form-label">Gender</label>
+                <div class="d-flex">
+                    <input type="radio" name="gender" id="male" value="male" formControlName="gender" class="form-check-input me-2" checked>
+                    <label class="form-check-label me-3" for="male">Male</label>
+                    <input type="radio" name="gender" id="female" value="female" formControlName="gender" class="form-check-input me-2">
+                    <label class="form-check-label me-3" for="female">Female</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="mobile">Mobile Number</label>
+                <input type="number" name="mobile" id="mobile" placeholder="999-999-9999" formControlName="mobile" class="form-control">
+                <p class="form-text" *ngIf="!customerForm.get('mobile')?.valid && customerForm.get('mobile')?.touched">
+                    <span *ngIf="customerForm.get('mobile')?.errors?.['pattern']">Number must contain only 10 digit</span>
+                    <span *ngIf="customerForm.get('mobile')?.errors?.['required']">Required</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <!-- BUTTONS -->
+    <div class="btn-wrap">
+        <button type="submit" [disabled]="!customerForm.valid"
+            class="btn btn-primary me-3">{{ editMode ? 'Update': 'Submit' }}</button>
+        <button type="button" class="btn btn-danger" (click)="onCancelForm()">Cancel</button>
+    </div>
+</form>

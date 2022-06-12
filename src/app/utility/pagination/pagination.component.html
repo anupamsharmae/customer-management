@@ -1,0 +1,15 @@
+<nav aria-label="Page navigation example">
+	<ul class="pagination justify-content-center">
+		<li class="page-item" [ngClass]="{'disabled': (activePage != 1) ? false : true}">
+			<a class="page-link" (click)="onPrevious()">Previous</a>
+		</li>
+		<li class="page-item" *ngFor="let pageNumber of pageNumbers" [routerLinkActive]="['active']">
+			<a class="page-link" [routerLink]="['../',(pageNumber+1)]">
+				{{pageNumber+1}}
+			</a>
+		</li>
+		<li class="page-item" [ngClass]="{'disabled': (activePage != pageNumbers?.length)? false:  true}">
+			<a class="page-link" (click)="onNext()">Next</a>
+		</li>
+	</ul>
+</nav>

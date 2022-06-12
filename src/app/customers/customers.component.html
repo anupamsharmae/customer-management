@@ -1,0 +1,25 @@
+<!-- loading Spinner -->
+<div class="fixed" *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<!-- modal popup -->
+<ng-template appPlaceholder></ng-template>
+<!-- app section -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 pt-5 p-3">
+            <h1>Customer Service Application</h1>
+            <div class="btn-wrap">
+                <button class="btn btn-primary me-3" (click)="navigateToAddCustomer()">Add Customer</button>
+                <button class="btn btn-primary" (click)="navigateToCustomers()">Customer Lists</button>
+            </div>
+        </div>
+        <hr>
+        <div class="col-md-12 col-lg-10 mx-auto">
+            <!-- Routes -->
+            <ng-container *ngIf="!isLoading">
+                <router-outlet></router-outlet>
+            </ng-container>
+        </div>
+    </div>
+</div>

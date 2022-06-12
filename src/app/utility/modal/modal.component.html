@@ -1,0 +1,11 @@
+<div class="popup">
+    <h2 class="modal-title mb-0">Sure! you want to {{data.action}} !</h2>
+    <div class="modal-body">
+        <p>Name : {{data.firstName}} {{data.lastName}}</p>
+        <p>Email : {{data.email}} </p>
+    </div>
+    <div class="modal-footer border-0 p-0">
+        <button class="btn btn-light btn-sm" (click)="onNoClick()">Decline</button>
+        <button class="btn btn-sm" [ngClass]="(data.action === 'Enable')? 'btn-primary': 'btn-danger'"  (click)="onConfirm()">Proceed</button>
+    </div>
+</div>
